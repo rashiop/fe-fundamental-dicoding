@@ -1,7 +1,8 @@
-class DataSource {
-    searchClub(keyword) {
-        const filteredClubs = clubs.filter((club) => club.name.toUpperCase().includes(keyword.toUpperCase()));
+import clubs from './clubs.js';
 
+class DataSource {
+    static searchClub(keyword) {
+        const filteredClubs = clubs.filter((club) => club.name.toUpperCase().includes(keyword.toUpperCase()));
         return new Promise((resolve, reject) => {
             if (filteredClubs.length) {
                 resolve(filteredClubs)
@@ -11,3 +12,5 @@ class DataSource {
         })
     }
 }
+
+export default DataSource

@@ -1,13 +1,14 @@
+import DataSource from '../data/data-source.js';
+
 const main = () => {
     const searchElement = document.querySelector("#searchElement");
     const buttonSearchElement = document.querySelector("#searchButtonElement");
     const clubListElement = document.querySelector("#clubList");
 
     const onButtonSearchClicked = async () => {
-        const dataSource = new DataSource();
         try {
-            const filtered = await dataSource.searchClub(searchElement.value);
-            renderResult(filtered)
+            const filteredClubs = await DataSource.searchClub(searchElement.value);
+            renderResult(filteredClubs)
         } catch(ex) {
             fallbackResult(ex);
         }
@@ -35,3 +36,5 @@ const main = () => {
 
     buttonSearchElement.addEventListener("click", onButtonSearchClicked);
 };
+
+export default main;
