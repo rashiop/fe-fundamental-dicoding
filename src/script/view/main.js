@@ -10,7 +10,6 @@ const main = () => {
     const onButtonSearchClicked = async () => {
         try {
             const filteredClubs = await DataSource.searchClub( searchElement.value );
-            console.log( 'value', filteredClubs )
             renderResult( filteredClubs )
         } catch ( ex ) {
             fallbackResult( ex );
