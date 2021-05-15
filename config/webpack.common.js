@@ -1,10 +1,17 @@
 const path = require( 'path' )
-const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ImageMinPlugin = require("imagemin-webpack-plugin").default;
+
+
+const source_path = path.resolve(__dirname, '../src/');
+const output_path = path.resolve( __dirname, '../dist/' );
 
 module.exports = {
-  entry: path.resolve( __dirname, '../src/app.js' ),
+  entry: path.resolve( source_path, 'app.js'),
   output: {
-    path: path.resolve( __dirname, '../dist' ),
+    path: path.resolve(output_path),
     filename: 'bundle.js'
   },
   module: {
@@ -17,9 +24,24 @@ module.exports = {
     }]
   },
   plugins: [
+    new ImageMinPlugin({ test: /\.(jpg|jpeg|png|gif|svg)$/i }),
     new HtmlWebpackPlugin( {
       template: './src/template.html',
       filename: 'index.html'
-    } )
+    } ),
+        new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(source_path, "images", "content"),
+          to: path.resolve(output_path, "images", "content"),
+          toType: "dir",
+        },
+        {
+          from: path.resolve(source_path, "images", "design"),
+          to: path.resolve(output_path, "images", "design"),
+          toType: "dir"
+        },
+      ],
+    }),
   ]
 }

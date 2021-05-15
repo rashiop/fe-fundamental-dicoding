@@ -7,15 +7,13 @@ module.exports = merge( common, {
     rules: [
       {
         test: /\.js$/,
-        use: [
-          {
+        use: {
             loader: 'babel-loader',
             options: {
               preset: ['@babel/preset-env']
             },
             exclude: '../node_modules'
           }
-        ]
       }
     ]
   }
